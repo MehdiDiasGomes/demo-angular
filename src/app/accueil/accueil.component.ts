@@ -7,6 +7,12 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 
+declare type categorie = {
+  nom: string;
+  images: string[];
+  editCategorie: boolean;
+};
+
 @Component({
   selector: 'app-accueil',
   standalone: true,
@@ -18,28 +24,33 @@ export class AccueilComponent {
   saisieImage = '';
   saisiCategorie = '';
 
-  categories: { nom: string; images: string[] }[] = [
+  categories: { nom: string; images: string[]; editCategorie: boolean }[] = [
     {
       nom: 'Super',
       images: [
         'https://media1.thrillophilia.com/filestore/8vh1qgvmud08c5vm2goj4aucretr_ew41nl9hgdajdas55cjfe02isgid_119.jpg',
       ],
+      editCategorie: false,
     },
     {
       nom: 'Bien',
       images: [],
+      editCategorie: false,
     },
     {
       nom: 'Moyen',
       images: [],
+      editCategorie: false,
     },
     {
       nom: 'Pas top',
       images: [],
+      editCategorie: false,
     },
     {
       nom: 'Nul',
       images: [],
+      editCategorie: false,
     },
   ];
 
@@ -68,20 +79,30 @@ export class AccueilComponent {
 
   ajouterCategorie() {
     if (!this.saisiCategorie) {
-      alert("Veuillez saisir un nom de categorie");
+      alert('Veuillez saisir un nom de categorie');
       return;
     }
     this.categories.push({
       nom: this.saisiCategorie,
       images: [],
+      editCategorie: false,
     });
     this.saisiCategorie = '';
     this.sauvegarde();
   }
 
   removeCategories(indexCategorie: number) {
-    this.categories.splice(indexCategorie, 1)
-    this.sauvegarde();
+    //On déplace toutes les images dans la categoire au dessus
+    if (this.categories.length >= 1) {
+      const indexCategorieCible = indexCategorie === 0 ? 1 : indexCategorie - 1;
+
+      this.categories[indexCategorieCible].images = [
+        ...this.categories[indexCategorieCible].images,
+        ...this.categories[indexCategorie].images,
+      ];
+      this.categories.splice(indexCategorie, 1);
+      this.sauvegarde();
+    }
   }
 
   mooveImage(indexCategorie: number, indexImage: number, bottom = true) {
@@ -99,6 +120,57 @@ export class AccueilComponent {
 
   supprimerImage(indexCategorie: number, indexImage: number) {
     this.categories[indexCategorie].images.splice(indexImage, 1);
+    this.sauvegarde();
+  }
+
+  doubleClickNomCategorie(categorie: categorie, evenement: any) {
+    categorie.editCategorie = true;
+    const elementClique = evenement.target;
+    const enTeteClique = elementClique.closest('.header');
+    const inputEnTete = enTeteClique.querySelector('input');
+    setTimeout(() => {
+      inputEnTete.focus();
+    }, 1);
+  }
+
+  onKeyUpTitreCategorie(categorie: categorie, evenement: any) {
+    if(evenement.key == "Escape" || evenement.key == "Enter") {
+      categorie.editCategorie = false
+    }
+    this.sauvegarde();
+  }
+
+  reset() {
+    this.categories = [
+      {
+        nom: 'Super',
+        images: [
+          'https://media1.thrillophilia.com/filestore/8vh1qgvmud08c5vm2goj4aucretr_ew41nl9hgdajdas55cjfe02isgid_119.jpg',
+        ],
+        editCategorie: false,
+      },
+      {
+        nom: 'Bien',
+        images: [],
+        editCategorie: false,
+      },
+      {
+        nom: 'Moyen',
+        images: [],
+        editCategorie: false,
+      },
+      {
+        nom: 'Pas top',
+        images: [],
+        editCategorie: false,
+      },
+      {
+        nom: 'Nul',
+        images: [],
+        editCategorie: false,
+      },
+    ];
+
     this.sauvegarde();
   }
 }

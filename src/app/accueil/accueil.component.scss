@@ -1,210 +1,241 @@
 * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
 }
 
 h1 {
-    color: black;
+  color: black;
 }
 
 h1::before {
-    content: "📋 ";
+  content: "📋 ";
 }
 
 .categorie {
-    position: relative;
-    height: 100px;
+  position: relative;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(233, 233, 233);
+
+  .header {
+    color: white;
+    width: 100px;
+    height: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    background-color: rgb(233, 233, 233);
+    font-weight: bold;
+    background-color: rgb(225, 0, 255);
 
-    .header {
-        color: white;
-        width: 100px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        background-color: rgb(225, 0, 255);
+    input {
+      width: 100%;
     }
 
-    &:nth-child(1) .header {
-        background-color: red;
+    .invisible {
+      width: 0;
+      opacity: 0;
+      border: 0;
+      padding: 0;
+      margin: 0;
     }
-    
-    &:nth-child(2) .header {
-        background-color: rgb(255, 85, 0);
-    }
-    
-    &:nth-child(3) .header {
-        background-color: rgb(43, 223, 37);
-    }
-    
-    &:nth-child(4) .header {
-        background-color: rgb(0, 179, 255);
-    }
-    
-    &:nth-child(5) .header {
-        background-color: rgb(255, 0, 255);
-    }
-    
-    &:nth-child(6) .header {
-        background-color: rgb(176, 176, 14); 
-    }
-    
-    &:nth-child(7) .header {
-        background-color: rgb(0, 255, 127);
-    }
-    
-    &:nth-child(8) .header {
-        background-color: rgb(255, 140, 0); 
-    }
-    
-    &:nth-child(9) .header {
-        background-color: rgb(153, 50, 204); 
-    }
-    
-    &:nth-child(10) .header {
-        background-color: rgb(27, 196, 196); 
-    }
-    
-    &:nth-child(11) .header {
-        background-color: rgb(0, 128, 128); 
-    }
-    
-    &:nth-child(12) .header {
-        background-color: rgb(255, 105, 180); 
-    }
-    
-    &:nth-child(13) .header {
-        background-color: rgb(75, 0, 130);
-    }
-    
-    &:nth-child(14) .header {
-        background-color: rgb(240, 230, 140);
-    }
-    
-    &:nth-child(15) .header {
-        background-color: rgb(128, 128, 128);
-    }
-    
+  }
 
-    .removeCategories {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        z-index: 10;
-        color: black;
-        background-color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 30px;
-        height: 30px;
-        font-weight: bold;
-        cursor: pointer;
-        user-select: none;
-        display: none;
-    }
+  &:nth-child(1) .header {
+    background-color: red;
+  }
 
-    &:hover .removeCategories {
-        display: flex;
-    }
+  &:nth-child(2) .header {
+    background-color: rgb(255, 85, 0);
+  }
+
+  &:nth-child(3) .header {
+    background-color: rgb(43, 223, 37);
+  }
+
+  &:nth-child(4) .header {
+    background-color: rgb(0, 179, 255);
+  }
+
+  &:nth-child(5) .header {
+    background-color: rgb(255, 0, 255);
+  }
+
+  &:nth-child(6) .header {
+    background-color: rgb(176, 176, 14);
+  }
+
+  &:nth-child(7) .header {
+    background-color: rgb(0, 255, 127);
+  }
+
+  &:nth-child(8) .header {
+    background-color: rgb(255, 140, 0);
+  }
+
+  &:nth-child(9) .header {
+    background-color: rgb(153, 50, 204);
+  }
+
+  &:nth-child(10) .header {
+    background-color: rgb(27, 196, 196);
+  }
+
+  &:nth-child(11) .header {
+    background-color: rgb(0, 128, 128);
+  }
+
+  &:nth-child(12) .header {
+    background-color: rgb(255, 105, 180);
+  }
+
+  &:nth-child(13) .header {
+    background-color: rgb(75, 0, 130);
+  }
+
+  &:nth-child(14) .header {
+    background-color: rgb(240, 230, 140);
+  }
+
+  &:nth-child(15) .header {
+    background-color: rgb(128, 128, 128);
+  }
+
+  .editCategorie {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 12;
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    display: none;
+  }
+
+  &:hover .editCategorie {
+    display: flex;
+  }
+
+  .removeCategories {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 10;
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    display: none;
+  }
+
+  &:hover .removeCategories {
+    display: flex;
+  }
 }
 
 .images {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
 
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    user-select: none;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
 
-    img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
+  .container-image {
+    position: relative;
+
+    .moove {
+      position: absolute;
+      z-index: 10;
+      color: black;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      display: none;
     }
 
-    .container-image {
-        position: relative;
-    
-        .moove {
-            position: absolute;
-            z-index: 10;
-            color: black;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 30px;
-            height: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-            display: none;
-        }
-
-        &:hover .moove {
-            display: flex;
-        }
-    
-        .plus {
-            right: 0;
-            top: 0;
-        }
-    
-        .moin {
-            right: 0;
-            bottom: 0;
-            transform: rotate(180deg);
-        }
-
-        .delete {
-            left: 0;
-            top: 0;
-            cursor: pointer;
-            user-select: none;
-        }
+    &:hover .moove {
+      display: flex;
     }
+
+    .plus {
+      right: 0;
+      top: 0;
+    }
+
+    .moin {
+      right: 0;
+      bottom: 0;
+      transform: rotate(180deg);
+    }
+
+    .delete {
+      left: 0;
+      top: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
 }
 
 .container-categorie {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .champs {
-    margin-top: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+
+  button,
+  input {
+    padding: 5px;
+  }
+
+  button {
+    background-color: rgb(75, 75, 75);
+    transition: all 0.3s ease-in-out;
+    color: white;
+    user-select: none;
+  }
+
+  button:hover {
+    transform: scale(0.9);
+  }
+
+  .input {
     display: flex;
-    gap: 4rem;
-    justify-content: center;
     align-items: center;
-
-    button,
-    input {
-        padding: 5px;
-    }
-
-    button {
-        background-color: rgb(75, 75, 75);
-        transition: all 0.3s ease-in-out;
-        color: white;
-        user-select: none;
-    }
-
-    button:hover {
-        transform: scale(0.9);
-    }
-
-    .input {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+    gap: 10px;
+  }
 }
-
