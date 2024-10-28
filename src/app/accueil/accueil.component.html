@@ -1,0 +1,40 @@
+<h1>Tier list</h1>
+
+<!-- () = Sortant, [] = Entrant -->
+<div class="champs">
+    <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
+    <button (click)="ajouterImage()">Ajouter</button>
+</div>
+
+<div class="container-categorie">
+    @for (categorie of categories; let indexCategorie = $index ; track
+    indexCategorie) {
+    <div class="categorie">
+        <div class="header">
+            {{ categorie.nom }}
+        </div>
+        <div class="images">
+            @for (image of categorie.images; let indexImage = $index; track
+            indexImage) {
+            <div class="container-image">
+                @if (indexCategorie != 0) {
+                <div class="moove plus" (click)="mooveImage(indexCategorie, indexImage, false)">
+                    ^
+                </div>
+                } @if (indexCategorie < categories.length - 1) { <div class="moove moin"
+                    (click)="mooveImage(indexCategorie, indexImage)">
+                    ^
+            </div>
+            }
+            <div>
+                <div class="moove delete" (click)="supprimerImage(indexCategorie, indexImage)">
+                    X
+                </div>
+            </div>
+            <img src="{{ image }}" />
+        </div>
+        }
+    </div>
+</div>
+}
+</div>
