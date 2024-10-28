@@ -2,14 +2,19 @@
 
 <!-- () = Sortant, [] = Entrant -->
 <div class="champs">
-    <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
-    <button (click)="ajouterImage()">Ajouter</button>
+    <div class="input"> <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
+        <button (click)="ajouterImage()">Ajouter</button>
+    </div>
+    <div class="input"> <input type="text" placeholder="Insérer une catégorie" [(ngModel)]="saisiCategorie" />
+        <button (click)="ajouterCategorie()">Ajouter</button>
+    </div>
 </div>
 
 <div class="container-categorie">
     @for (categorie of categories; let indexCategorie = $index ; track
     indexCategorie) {
     <div class="categorie">
+        <div class="removeCategories" (click)="removeCategories(indexCategorie)">X</div>
         <div class="header">
             {{ categorie.nom }}
         </div>

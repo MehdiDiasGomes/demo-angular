@@ -16,6 +16,7 @@ import {
 })
 export class AccueilComponent {
   saisieImage = '';
+  saisiCategorie = '';
 
   categories: { nom: string; images: string[] }[] = [
     {
@@ -42,6 +43,7 @@ export class AccueilComponent {
     },
   ];
 
+  //Fonction appelé d'office au démarrage de l'application
   ngOnInit() {
     const sauvegarde = localStorage.getItem('sauvegarde');
     if (sauvegarde) {
@@ -61,6 +63,24 @@ export class AccueilComponent {
     }
     this.categories[0].images.push(this.saisieImage);
     this.saisieImage = '';
+    this.sauvegarde();
+  }
+
+  ajouterCategorie() {
+    if (!this.saisiCategorie) {
+      alert("Veuillez saisir un nom de categorie");
+      return;
+    }
+    this.categories.push({
+      nom: this.saisiCategorie,
+      images: [],
+    });
+    this.saisiCategorie = '';
+    this.sauvegarde();
+  }
+
+  removeCategories(indexCategorie: number) {
+    this.categories.splice(indexCategorie, 1)
     this.sauvegarde();
   }
 
