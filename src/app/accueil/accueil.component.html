@@ -1,51 +1,54 @@
-<h1>Tier list</h1>
+<div class="accueil">
+    <h1>Tier list</h1>
 
-<!-- () = Sortant, [] = Entrant -->
-<div class="champs">
-    <div class="input"> <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
-        <button (click)="ajouterImage()">Ajouter</button>
-    </div>
-    <div class="input"> <input type="text" placeholder="Insérer une catégorie" [(ngModel)]="saisiCategorie" />
-        <button (click)="ajouterCategorie()">Ajouter</button>
-    </div>
-    <button (click)="reset()">Reset</button>
-</div>
-
-<div class="container-categorie">
-    @for (categorie of categories; let indexCategorie = $index ; track
-    indexCategorie) {
-    <div class="categorie">
-        @if (categories.length > 1) {
-        <div class="removeCategories" (click)="removeCategories(indexCategorie)">X</div>
-        }
-        <div class="header">
-            <input #editNomCategorie type="text" [(ngModel)]="categorie.nom" (keyup)="onKeyUpTitreCategorie(categorie, $event)"
-                [class.invisible]="!categorie.editCategorie" (blur)="categorie.editCategorie = false; sauvegarde()">
-            <span (dblclick)="doubleClickNomCategorie(categorie, $event)"
-                [class.invisible]="categorie.editCategorie">{{ categorie.nom }}</span>
+    <!-- () = Sortant, [] = Entrant -->
+    <div class="champs">
+        <div class="input"> <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
+            <button (click)="ajouterImage()">Ajouter</button>
         </div>
-        <div class="images">
-            @for (image of categorie.images; let indexImage = $index; track
-            indexImage) {
-            <div class="container-image">
-                @if (indexCategorie != 0) {
-                <div class="moove plus" (click)="mooveImage(indexCategorie, indexImage, false)">
-                    ^
+        <div class="input"> <input type="text" placeholder="Insérer une catégorie" [(ngModel)]="saisiCategorie" />
+            <button (click)="ajouterCategorie()">Ajouter</button>
+        </div>
+        <button (click)="reset()">Reset</button>
+    </div>
+
+    <div class="container-categorie">
+        @for (categorie of categories; let indexCategorie = $index ; track
+        indexCategorie) {
+        <div class="categorie">
+            @if (categories.length > 1) {
+            <div class="removeCategories" (click)="removeCategories(indexCategorie)">X</div>
+            }
+            <div class="header">
+                <input #editNomCategorie type="text" [(ngModel)]="categorie.nom"
+                    (keyup)="onKeyUpTitreCategorie(categorie, $event)" [class.invisible]="!categorie.editCategorie"
+                    (blur)="categorie.editCategorie = false; sauvegarde()">
+                <span (dblclick)="doubleClickNomCategorie(categorie, $event)"
+                    [class.invisible]="categorie.editCategorie">{{ categorie.nom }}</span>
+            </div>
+            <div class="images">
+                @for (image of categorie.images; let indexImage = $index; track
+                indexImage) {
+                <div class="container-image">
+                    @if (indexCategorie != 0) {
+                    <div class="moove plus" (click)="mooveImage(indexCategorie, indexImage, false)">
+                        ^
+                    </div>
+                    } @if (indexCategorie < categories.length - 1) { <div class="moove moin"
+                        (click)="mooveImage(indexCategorie, indexImage)">
+                        ^
                 </div>
-                } @if (indexCategorie < categories.length - 1) { <div class="moove moin"
-                    (click)="mooveImage(indexCategorie, indexImage)">
-                    ^
+                }
+                <div>
+                    <div class="moove delete" (click)="supprimerImage(indexCategorie, indexImage)">
+                        X
+                    </div>
+                </div>
+                <img src="{{ image }}" />
             </div>
             }
-            <div>
-                <div class="moove delete" (click)="supprimerImage(indexCategorie, indexImage)">
-                    X
-                </div>
-            </div>
-            <img src="{{ image }}" />
         </div>
-        }
     </div>
+    }
 </div>
-}
 </div>

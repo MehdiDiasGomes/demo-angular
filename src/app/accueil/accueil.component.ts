@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   CdkDragDrop,
@@ -6,6 +6,7 @@ import {
   transferArrayItem,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
+import { HttpClient } from '@angular/common/http';
 
 declare type categorie = {
   nom: string;
@@ -16,13 +17,34 @@ declare type categorie = {
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [FormsModule, DragDropModule], // Ajout de DragDropModule ici
+  imports: [FormsModule],
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent {
   saisieImage = '';
   saisiCategorie = '';
+
+  http: HttpClient = inject(HttpClient);
+
+  //Fonction appelé d'office au démarrage de l'application
+  ngOnInit() {
+    const jwt = localStorage.getItem('jwt');
+
+    //Si la personne est connecté
+    if (jwt) {
+      this.http
+        .get('http://localhost:3000/categories', {
+          headers: { Authorization: jwt },
+        })
+        .subscribe((categories: any) => (this.categories = categories));
+    }
+
+    // const sauvegarde = localStorage.getItem('sauvegarde');
+    // if (sauvegarde) {
+    //   this.categories = JSON.parse(sauvegarde);
+    // }
+  }
 
   categories: { nom: string; images: string[]; editCategorie: boolean }[] = [
     {
@@ -53,14 +75,6 @@ export class AccueilComponent {
       editCategorie: false,
     },
   ];
-
-  //Fonction appelé d'office au démarrage de l'application
-  ngOnInit() {
-    const sauvegarde = localStorage.getItem('sauvegarde');
-    if (sauvegarde) {
-      this.categories = JSON.parse(sauvegarde);
-    }
-  }
 
   sauvegarde() {
     const jsonCategories = JSON.stringify(this.categories);
@@ -134,8 +148,8 @@ export class AccueilComponent {
   }
 
   onKeyUpTitreCategorie(categorie: categorie, evenement: any) {
-    if(evenement.key == "Escape" || evenement.key == "Enter") {
-      categorie.editCategorie = false
+    if (evenement.key == 'Escape' || evenement.key == 'Enter') {
+      categorie.editCategorie = false;
     }
     this.sauvegarde();
   }

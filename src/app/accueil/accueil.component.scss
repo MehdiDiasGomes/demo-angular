@@ -5,8 +5,12 @@
   box-sizing: border-box;
 }
 
-h1 {
-  color: black;
+.accueil {
+  margin: 20px;
+}
+
+body {
+  color: white;
 }
 
 h1::before {
@@ -18,7 +22,7 @@ h1::before {
   height: 100px;
   display: flex;
   align-items: center;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(144, 144, 144);
 
   .header {
     color: white;
