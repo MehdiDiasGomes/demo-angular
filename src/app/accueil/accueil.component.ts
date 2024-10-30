@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -7,6 +7,8 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 declare type categorie = {
   nom: string;
@@ -17,13 +19,13 @@ declare type categorie = {
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent {
   saisieImage = '';
-  saisiCategorie = '';
+  saisieCategorie = '';
 
   http: HttpClient = inject(HttpClient);
 

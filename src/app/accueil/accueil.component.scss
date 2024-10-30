@@ -221,22 +221,6 @@ h1::before {
   justify-content: center;
   align-items: center;
 
-  button,
-  input {
-    padding: 5px;
-  }
-
-  button {
-    background-color: rgb(75, 75, 75);
-    transition: all 0.3s ease-in-out;
-    color: white;
-    user-select: none;
-  }
-
-  button:hover {
-    transform: scale(0.9);
-  }
-
   .input {
     display: flex;
     align-items: center;

@@ -3,13 +3,21 @@
 
     <!-- () = Sortant, [] = Entrant -->
     <div class="champs">
-        <div class="input"> <input type="text" placeholder="Insérer lien de l'image" [(ngModel)]="saisieImage" />
-            <button (click)="ajouterImage()">Ajouter</button>
+        <div class="flex items-start flex-col">
+            <mat-form-field class="w-[20rem]">
+                <mat-label>Url Image</mat-label>
+                <input [(ngModel)]="saisieImage" matInput type="text">
+            </mat-form-field>
+            <button class="w-1/2" (click)="ajouterImage()" mat-flat-button>Ajouter</button>
         </div>
-        <div class="input"> <input type="text" placeholder="Insérer une catégorie" [(ngModel)]="saisiCategorie" />
-            <button (click)="ajouterCategorie()">Ajouter</button>
+        <div class="flex items-start flex-col">
+            <mat-form-field class="w-[20rem]">
+                <mat-label>Nom catégorie</mat-label>
+                <input [(ngModel)]="saisieCategorie" matInput type="text">
+            </mat-form-field>
+            <button class="w-1/2" (click)="ajouterCategorie()" mat-flat-button>Ajouter</button>
         </div>
-        <button (click)="reset()">Reset</button>
+        <button mat-flat-button (click)="reset()">Reset</button>
     </div>
 
     <div class="container-categorie">

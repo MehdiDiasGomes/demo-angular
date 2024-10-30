@@ -15,6 +15,8 @@ import {
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { ConnexionService } from '../services/connexion.service';
 
 @Component({
   selector: 'app-connexion',
@@ -25,7 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class ConnexionComponent {
   constructorFormulaire = inject(FormBuilder);
-  http = inject(HttpClient)
+  http = inject(HttpClient);
+  router = inject(Router);
+  connexionService = inject(ConnexionService);
 
   formulaire: FormGroup = this.constructorFormulaire.group({
     email: ['', [Validators.email, Validators.required]],
@@ -35,8 +39,13 @@ export class ConnexionComponent {
   onConnexion() {
     if (this.formulaire.valid) {
       const utilisateur = this.formulaire.value;
-      this.http.post("http://localhost:3000/connexion", utilisateur)
-      .subscribe((response: any) => localStorage.setItem("jwt", response.jwt))
+      this.http
+        .post('http://localhost:3000/connexion', utilisateur)
+        .subscribe((response: any) => {
+          localStorage.setItem('jwt', response.jwt);
+          this.router.navigateByUrl('/accueil');
+          this.connexionService.connecte = true
+        });
     }
   }
 }
