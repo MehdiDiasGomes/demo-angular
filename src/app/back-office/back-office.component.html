@@ -1,0 +1,26 @@
+<div class="m-3">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center p-3 bg-teal-400 text-white">
+            <span class="w-1/2 font-semibold text-start">ID</span>
+            <span class="w-1/2 font-semibold text-start">Email</span>
+            <span class="w-1/2 font-semibold text-start">Statut</span>
+            <span class="w-1/2 font-semibold text-start">Action</span>
+        </div>
+        <!-- Body -->
+        @for (utilisateur of utilisateurs; track $index) {
+            <div class="flex items-center p-3 border-b border-gray-300 text-black">
+                <span class="w-1/2 text-start">{{ utilisateur.id }}</span>
+                <span class="w-1/2 text-start">{{ utilisateur.email }}</span>
+                <span class="w-1/2 text-start">{{ utilisateur.bloque ? "Bloquer" : "Débloquer" }}</span>
+                <div class="w-1/2 text-start">
+                    <button 
+                        (click)="toggleBloque(utilisateur, $index)" 
+                        class="p-2 bg-gray-200 rounded-md text-black hover:bg-gray-300 transition-colors">
+                        {{ utilisateur.bloque ? 'Débloquer' : 'Bloquer' }}
+                    </button>
+                </div>
+            </div>            
+        }
+    </div>
+</div>

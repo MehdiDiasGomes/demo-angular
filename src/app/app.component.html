@@ -1,11 +1,14 @@
-<nav class="w-full">
-  <ul class="flex items-center gap-2 p-3">
+<nav class="w-full flex justify-between items-center p-3">
+  <ul class="flex items-center gap-2">
     <li><a routerLink="/accueil" routerLinkActive="page-actuelle">Accueil</a></li>
     @if (!ConnexionService.connecte) {
     <li><a routerLink="/connexion" routerLinkActive="page-actuelle">Connexion</a></li>
     } @else {
     <li><a routerLink="/connexion" routerLinkActive="page-actuelle" (click)="deconnexion()">Déconnexion</a></li>
     }
+  </ul>
+  <ul>
+    <li><a routerLink="/admin" routerLinkActive="page-actuelle">Admin</a></li>
   </ul>
 </nav>
 

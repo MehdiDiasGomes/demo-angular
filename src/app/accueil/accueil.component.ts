@@ -94,16 +94,16 @@ export class AccueilComponent {
   }
 
   ajouterCategorie() {
-    if (!this.saisiCategorie) {
+    if (!this.saisieCategorie) {
       alert('Veuillez saisir un nom de categorie');
       return;
     }
     this.categories.push({
-      nom: this.saisiCategorie,
+      nom: this.saisieCategorie,
       images: [],
       editCategorie: false,
     });
-    this.saisiCategorie = '';
+    this.saisieCategorie = '';
     this.sauvegarde();
   }
 
